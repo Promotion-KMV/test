@@ -1,17 +1,36 @@
 "use strict"
-let numberOfFilms = +prompt("Сколько фильмов вы посмотрели", "");
 
-let personalMovieDB = {
+const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
+
+const personalMovieDB = {
     count: numberOfFilms,
     movies: {},
     actors: {},
     genres: [],
-    privat: false,
+    privat: false
 };
-let watchFilm = prompt("Один из просмотренных фильмов", ""),
-    countFilm = prompt("Оценка фильма", ""),
-    watchFilms = prompt("Один из просмотренных фильмов", ""),
-    countFilms = prompt("Оценка фильма", "");
-personalMovieDB.movies[watchFilm] = countFilm;
-personalMovieDB.movies[watchFilms] = countFilms;
-console.log(personalMovieDB.movies)
+
+for (let i = 0; i < 2; i++) {
+    const a = prompt('Один из последних просмотренных фильмов?', ''),
+          b = prompt('На сколько оцените его?', '');
+
+    if (a != null && b != null && a != '' && b != '' && a.length < 50) {
+        personalMovieDB.movies[a] = b;
+        console.log('done');
+    } else {
+        console.log('error');
+        i--;
+    }
+}
+
+if (personalMovieDB.count < 10) {
+    console.log("Просмотрено довольно мало фильмов");
+} else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
+    console.log("Вы классический зритель");
+} else if (personalMovieDB.count >= 30) {
+    console.log("Вы киноман");
+} else {
+    console.log("Произошла ошибка");
+}
+
+console.log(personalMovieDB);
